@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Jira AI Test Case Generator - Generate comprehensive test cases from Jira stories automatically">
+  <title>Jira AI Test Case Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Main App -->
+  <div class="app-container">
+    <header class="app-header">
+      <h1>Jira AI Test Case Generator</h1>
+      <div id="connection-status" class="loading-icon" style="display:none;">🌞</div>
+    </header>
+
+    <main class="main-content">
+      <div class="form-container">
+
+        <div class="form-group">
+          <label for="jira-url">Jira URL:</label>
+          <input type="url" id="jira-url" placeholder="Paste full Jira board/issue URL to auto-fill">
+        </div>
+
+        <div class="form-group">
+          <label for="jira-email">Jira Email:</label>
+          <input type="email" id="jira-email" placeholder="">
+        </div>
+
+        <div class="form-group">
+          <label for="jira-token">Jira API Token:</label>
+          <input type="password" id="jira-token" placeholder="">
+        </div>
+
+        <div class="form-group">
+          <label for="jira-domain">Jira Domain Name:</label>
+          <input type="text" id="jira-domain" placeholder="">
+        </div>
+
+        <div class="form-group">
+          <label for="jira-project">Jira Project Name:</label>
+          <div class="input-with-spinner">
+            <input type="text" id="jira-project" placeholder="">
+            <div class="inline-spinner" id="project-spinner" style="display:none;"></div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="jira-issue">Jira Issue ID:</label>
+          <select id="jira-issue" disabled>
+            <option value=""></option>
+          </select>
+        </div>
+
+        <div class="actions-row">
+          <div class="left-actions" style="display:flex; gap:10px;">
+            <button class="btn btn-test" id="btn-test">Test Connection</button>
+            <button class="btn btn-fetch" id="btn-fetch">Fetch Issues</button>
+          </div>
+          <button class="btn btn-generate" id="btn-generate" disabled>Generate Test Cases</button>
+          <button class="btn btn-reset" id="btn-reset">Reset</button>
+        </div>
+
+      </div>
+
+      <!-- Results section -->
+      <div id="results-panel" style="display: none;">
+        <div class="results-header">
+          <h2>Generated Test Cases <span id="test-count"></span></h2>
+          <button class="btn btn-export" id="btn-export-csv" style="display:none;">Export CSV</button>
+        </div>
+        <div id="results-content"></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

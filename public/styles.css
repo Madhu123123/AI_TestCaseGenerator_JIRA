@@ -1,0 +1,305 @@
+/* ============================================
+   JIRA AI TEST CASE GENERATOR - EXACT Match
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: #1e1e1e;
+  /* Match screenshot dark background */
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+.app-container {
+  padding: 40px;
+  /* generous padding around the window */
+  width: 100%;
+  max-width: 1400px;
+  /* wide container */
+  margin: 0 auto;
+}
+
+/* Header */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.app-header h1 {
+  color: #4f8aff;
+  /* screenshot blue */
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.loading-icon {
+  font-size: 24px;
+}
+
+/* Form Container */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  /* generous spacing between fields */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 14px;
+  color: #e0e0e0;
+  /* light grey label */
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 14px 16px;
+  background-color: #eaf0fb;
+  /* screenshot input background */
+  border: none;
+  border-radius: 6px;
+  color: #1a1a1c;
+  font-size: 15px;
+  outline: none;
+}
+
+.form-group input::placeholder {
+  color: #333;
+}
+
+/* Spinner */
+.input-with-spinner {
+  position: relative;
+}
+
+.inline-spinner {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border: 3px solid #ccc;
+  border-top-color: #0f62fe;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+/* Actions Row - Fetch Left, Generate Center, Reset Right */
+.actions-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.btn {
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.btn-test {
+  background-color: transparent;
+  color: #4caf50;
+  border: 1px solid #4caf50;
+}
+
+.btn-fetch {
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-generate {
+  background-color: #0d6efd;
+  /* bright blue */
+  color: white;
+  padding: 12px 32px;
+  font-weight: 600;
+}
+
+.btn-reset {
+  background-color: #4a4a4a;
+  /* dull grey */
+  color: white;
+  border: none;
+}
+
+/* Results section */
+#results-panel {
+  margin-top: 50px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 30px;
+}
+
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.results-header h2 {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+#test-count {
+  color: #4f8aff;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.btn-export {
+  background-color: #2196F3;
+  color: white;
+  padding: 8px 16px;
+}
+
+.testcase-card {
+  background: #2a2a2a;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border-left: 4px solid #4f8aff;
+}
+
+.tc-title {
+  font-weight: 600;
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.tc-section {
+  margin-bottom: 16px;
+}
+
+.tc-section-label {
+  color: #aaaaaa;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.tc-section-content {
+  color: #e0e0e0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.tc-steps {
+  padding-left: 24px;
+  color: #e0e0e0;
+  line-height: 1.6;
+}
+
+.tc-steps li {
+  margin-bottom: 4px;
+}
+
+/* Base loading spinner for general actions */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #444;
+  border-top-color: #4f8aff;
+  border-radius: 50%;
+  animation: rotate 1s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#loading-text {
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* Toast */
+#toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.toast {
+  background: #333;
+  color: white;
+  padding: 16px 24px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toast.error {
+  border-left: 4px solid #ef5350;
+}
+
+.toast.success {
+  border-left: 4px solid #4caf50;
+}
+
+.toast.info {
+  border-left: 4px solid #29b6f6;
+}
