@@ -44,10 +44,18 @@ The application will start a local server at **http://localhost:4200**.
     *   **Jira API Token**: Paste your Jira API Token. 
         *(To create one, go to your Atlassian Account Settings > Security > Create and manage API tokens).*
 3.  **Test Connection (Optional)**: Click the **Test Connection** button (with the green outline) to instantly verify that your Email, Token, and Domain are correct. Look for the "Connection Test Successful!" toast at the top right.
+
+![Test Connection Success](docs/connection_success.png)
+
 4.  **Fetch Issues**: Click the **Fetch Issues** button. The application will connect to Jira and populate the "Jira Issue ID" dropdown with the latest issues (like user stories and bugs) from your specified project.
 5.  **Select an Issue**: Choose a specific Jira ticket from the newly populated "Jira Issue ID" dropdown.
+
+![Fetched Jira Issues](docs/fetch_issues.png)
+
 6.  **Generate Test Cases**: Click the blue **Generate Test Cases** button. The application will analyze the Jira issue and generate various test scenarios based on standard testing methodologies.
 7.  **Review and Export**: Scroll down to view the generated test cases organized by category. You can also click **Export CSV** to download them to your computer.
+
+![Generated Test Cases](docs/test_cases.png)
 
 ### Configuration Auto-Save
 
