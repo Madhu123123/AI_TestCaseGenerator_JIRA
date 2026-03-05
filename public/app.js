@@ -9,7 +9,17 @@
     let currentConfig = { email: '', apiToken: '', domain: '', projectName: '' };
     let currentIssues = [];
     let currentStory = null;
-    let testOptions = [];
+    let testOptions = [
+        { id: 'functional', label: 'Functional Testing', enabled: true },
+        { id: 'negative', label: 'Negative Testing', enabled: true },
+        { id: 'boundary', label: 'Boundary Value Analysis', enabled: true },
+        { id: 'uiux', label: 'UI/UX Testing', enabled: true },
+        { id: 'performance', label: 'Performance Testing', enabled: true },
+        { id: 'security', label: 'Security Testing', enabled: true },
+        { id: 'integration', label: 'Integration Testing', enabled: true },
+        { id: 'accessibility', label: 'Accessibility Testing', enabled: true },
+        { id: 'regression', label: 'Regression Testing', enabled: true },
+    ];
 
     // ======== DOM REFS ========
     const $ = (sel) => document.querySelector(sel);
@@ -38,58 +48,8 @@
 
     // ======== INIT ========
     async function init() {
-        await loadTestOptions();
         await loadSavedConfig();
         bindEvents();
-    }
-
-    // ======== TEST OPTIONS ========
-    async function loadTestOptions() {
-        try {
-            const res = await fetch('/api/test-options');
-            const data = await res.json();
-            testOptions = data.map(opt => ({ ...opt, enabled: true }));
-            renderTestOptions();
-        } catch {
-            // Fallback defaults
-            testOptions = [
-                { id: 'functional', label: 'Functional Testing', enabled: true },
-                { id: 'negative', label: 'Negative Testing', enabled: true },
-                { id: 'boundary', label: 'Boundary Value Analysis', enabled: true },
-                { id: 'uiux', label: 'UI/UX Testing', enabled: true },
-                { id: 'performance', label: 'Performance Testing', enabled: true },
-                { id: 'security', label: 'Security Testing', enabled: true },
-                { id: 'integration', label: 'Integration Testing', enabled: true },
-                { id: 'accessibility', label: 'Accessibility Testing', enabled: true },
-                { id: 'regression', label: 'Regression Testing', enabled: true },
-            ];
-            renderTestOptions();
-        }
-    }
-
-    function renderTestOptions() {
-        elements.optionsGrid.innerHTML = testOptions.map(opt => `
-      <div class="option-item ${opt.enabled ? 'checked' : ''}" data-id="${opt.id}">
-        <div class="option-checkbox">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
-            <polyline points="20 6 9 17 4 12"/>
-          </svg>
-        </div>
-        <span class="option-label">${opt.label}</span>
-      </div>
-    `).join('');
-
-        // Bind checkbox clicks
-        elements.optionsGrid.querySelectorAll('.option-item').forEach(item => {
-            item.addEventListener('click', () => {
-                const id = item.dataset.id;
-                const opt = testOptions.find(o => o.id === id);
-                if (opt) {
-                    opt.enabled = !opt.enabled;
-                    item.classList.toggle('checked', opt.enabled);
-                }
-            });
-        });
     }
 
     // ======== SAVED CONFIG ========
