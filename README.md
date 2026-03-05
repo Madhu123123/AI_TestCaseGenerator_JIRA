@@ -53,7 +53,7 @@ The application will start a local server at **http://localhost:4200**.
 ![Fetched Jira Issues](docs/fetch_issues.png)
 
 6.  **Generate Test Cases**: Click the blue **Generate Test Cases** button. The application will analyze the Jira issue and generate various test scenarios based on standard testing methodologies.
-7.  **Review and Export**: Scroll down to view the generated test cases organized by category. You can also click **Export CSV** to download them to your computer.
+7.  **Review and Export**: Scroll down to view the generated test cases organized by category. You can also click **Export CSV** to download them to your computer.test
 
 ![Generated Test Cases](docs/test_cases.png)
 
